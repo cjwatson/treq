@@ -39,7 +39,8 @@ __all__ = ["MultipartError", "MultipartParser", "MultipartPart", "parse_form_dat
 
 
 import re
-from io import BytesIO, IO
+from io import BytesIO
+from typing import IO
 from tempfile import TemporaryFile
 from urllib.parse import parse_qs
 from wsgiref.headers import Headers
