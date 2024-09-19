@@ -4,39 +4,33 @@
 Parser for multipart/form-data
 ==============================
 
-This module provides a parser for the multipart/form-data format. It can read
-from a file, a socket or a WSGI environment. The parser can be used to replace
+This module provides a parser for the multipart/form-data format.  It can read
+from a file, a socket or a WSGI environment.  The parser can be used to replace
 cgi.FieldStorage to work around its limitations.
+
+..note::
+
+    Copyright (c) 2010, Marcel Hellkamp.
+    Inspired by the Werkzeug library: http://werkzeug.pocoo.org/
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
 """
-
-"""
-Copyright (c) 2010, Marcel Hellkamp.
-Inspired by the Werkzeug library: http://werkzeug.pocoo.org/
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-"""
-
-__author__ = "Marcel Hellkamp"
-__version__ = "0.2.5"
-__license__ = "MIT"
-__all__ = ["MultipartError", "MultipartParser", "MultipartPart", "parse_form_data"]
-
 
 import re
 from io import BytesIO
@@ -45,6 +39,12 @@ from tempfile import TemporaryFile
 from urllib.parse import parse_qs
 from wsgiref.headers import Headers
 from collections.abc import MutableMapping as DictMixin
+
+
+__author__ = "Marcel Hellkamp"
+__version__ = "0.2.5"
+__license__ = "MIT"
+__all__ = ["MultipartError", "MultipartParser", "MultipartPart", "parse_form_data"]
 
 
 ##############################################################################
@@ -369,10 +369,11 @@ class MultipartParser(object):
 
 class MultipartPart(object):
     file: IO[bytes]
+
     def __init__(self, buffer_size=2**16, memfile_limit=2**18, charset="latin1"):
         self.headerlist = []
         self.headers = None
-        self.file = False       # type:ignore
+        self.file = False  # type:ignore
         self.size = 0
         self._buf = b""
         self.disposition = None
@@ -480,7 +481,7 @@ class MultipartPart(object):
     def close(self):
         if self.file:
             self.file.close()
-            self.file = False   # type:ignore
+            self.file = False  # type:ignore
 
 
 ##############################################################################
