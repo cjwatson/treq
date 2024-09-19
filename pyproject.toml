@@ -83,3 +83,9 @@ module = [
 disallow_untyped_defs = false
 check_untyped_defs = false
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+  module = [
+    "treq._multipart",
+  ]
+  disallow_untyped_defs = false
