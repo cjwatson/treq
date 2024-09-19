@@ -1,3 +1,0 @@
-treq has vendored its dependency on the ``multipart`` library to avoid import
-conflicts with ``python-multipart``; it should now be installable alongside
-that library.
