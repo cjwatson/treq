@@ -41,8 +41,8 @@ if __name__ == "__main__":
             "dev": [
                 "pep8",
                 "pyflakes",
-                "httpbin==0.7.0",
-                "werkzeug==2.0.3",
+                "httpbin==0.10.2",
+                "werkzeug==3.0.4",
             ],
             "docs": [
                 "sphinx<7.0.0",  # Removal of 'style' key breaks RTD.
